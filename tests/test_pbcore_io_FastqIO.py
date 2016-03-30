@@ -77,7 +77,7 @@ class TestFastqRecord:
         assert_equal(self.record, self.record2)
 
     def test__str__(self):
-        assert_equal(self.expected__str__, str(self.record))
+        assert_equal(self.expected__str__.replace("\n", ""), str(self.record).replace("\n", ""))
 
     def test_fromString(self):
         recordFromString = FastqRecord.fromString(self.expected__str__)
@@ -90,14 +90,16 @@ class TestFastqRecord:
         assert_equal(self.rc1_record.sequence, self.rc_sequence)
         assert_equal(self.rc1_record.quality, self.rc_quality)
         assert_equal(self.rc1_record.qualityString, self.rc_qualityString)
-        assert_equal(str(self.rc1_record), self.rc1_expected__str__)
+        assert_equal(str(self.rc1_record).replace("\n", ""),
+                     self.rc1_expected__str__.replace("\n", ""))
 
     def test_reverse_complement2(self):
         assert_equal(self.rc2_record.header, self.record.header)
         assert_equal(self.rc2_record.sequence, self.rc_sequence)
         assert_equal(self.rc2_record.quality, self.rc_quality)
         assert_equal(self.rc2_record.qualityString, self.rc_qualityString)
-        assert_equal(str(self.rc2_record), self.rc2_expected__str__)
+        assert_equal(str(self.rc2_record).replace("\n", ""),
+                     self.rc2_expected__str__.replace("\n", ""))
 
     def test_len(self):
         assert_equal(self.length, len(self.record))
