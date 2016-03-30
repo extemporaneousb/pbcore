@@ -189,10 +189,15 @@ class FastqRecord(object):
         Output a string representation of this FASTQ record, in
         standard four-line format.
         """
-        return "\n".join([self.DELIMITER1 + self.header,
-                          self.sequence,
+        def breakByNChar(s, n = 60):
+            p = [s[i:i+n] for i in range(0, len(s), n)]
+            return "\n".join(p)
+        
+        return "\n".join([self.DELIMITER1 + 
+                          self.header,
+                          breakByNChar(self.sequence, 60),
                           self.DELIMITER2,
-                          self.qualityString])
+                          breakByNChar(self.qualityString, 60)])
 
 class FastqReader(ReaderBase):
     """
